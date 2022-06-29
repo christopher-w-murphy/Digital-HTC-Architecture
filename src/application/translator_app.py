@@ -1,6 +1,6 @@
 from src.infrastructure.cli import construct_parser
 from src.infrastructure.configuration import get_deepl_auth_key
-from src.domain.translate import translate_document
+from src.infrastructure.deepl import translate_document
 
 
 def main():
