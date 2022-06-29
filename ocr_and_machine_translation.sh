@@ -14,13 +14,12 @@ do
   tiff=${file%.*}.tiff
   ocr=${file%.*}_ocr
   tlate=${file%.*}_trans
-  # Convert a PDF and make it easier to OCR
+  # Convert a PDF to TIFF and make it easier to OCR
   convert -density 300 $file -depth 8 -strip -background white -alpha off $tiff
   # Run the Tesseract OCR program to produce a plain text file in French
   tesseract $tiff $ocr -l fra
   # Translate the OCR text using DeepL
-  translator=$PROJECT_DIR/src/application/translator_app.py
-  python3 $translator $ocr $tlate
+  python3 -m src.application.translator_app $ocr $tlate
   # allow the previous file to finish being translated and written
   # as well as space out your requests to the DeepL API
   sleep 1m
