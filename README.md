@@ -2,7 +2,7 @@
 OCR and Machine Translation
 
 ## Instructions
-How to install and run the OCR and Machine Translation process. These instructions are for macOS.
+How to install and run the OCR and Machine Translation program. These instructions are for macOS. The Prerequisite and Setup steps only need to be run once.
 
 ### Prerequisites
 Strictly speaking, you need macOS Catalina (10.15) or higher with a 64-bit processor. However, I've tested that this works on macOS Mojave (10.14).
@@ -20,7 +20,7 @@ brew install git
 Note that Python 3 is also required. However, this is installed as a dependency in the installer script step below if it's not already on your machine. I'm using Python 3.9. At least Python 3.6 is needed to run this code, but I haven't tested different Python versions.
 
 ### Setup
-Clone this repo. Open a terminal and run:
+Clone this repo. One optional is to open a terminal and run:
 ```
 git clone https://github.com/christopher-w-murphy/Digital-HTC-Architecture.git
 ```
@@ -33,7 +33,7 @@ Run the installer script:
 bash macos_installer.sh
 ```
 
-DeepL is used for translation, and an authentication key is needed to access their API. You can get a key for free, but [registration](https://www.deepl.com/pro-api?cta=header-pro-api) is required. Treat this key as you would a password. In the configs folder create a plain text file called `auth.txt` and paste your key in the file (and nothing else). Git will ignore this file, so it will not be version controlled, i.e. not shared publicly.
+DeepL is used for translation, and an authentication key is needed to access their API. You can get a key for free, but [registration](https://www.deepl.com/pro-api?cta=header-pro-api) is required. Treat this key as you would a password. For setup purposes, in the configs folder create a plain text file called `auth.txt` and paste your key in the file (and nothing else). Git will ignore this file, so it will not be version controlled, i.e. not shared publicly.
 
 ### Running the OCR and Translation Program
 
