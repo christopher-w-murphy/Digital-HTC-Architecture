@@ -1,2 +1,5 @@
 .DS_Store
 configs/**
+!configs/__init__.py
+*.pyc
+__pycache__/
