@@ -14,7 +14,7 @@ source venv/digital_htc_architecture/bin/activate
 for file in $FILES;
 do
   # Run the OCR and Translation program on a file
-  python3 -m src.application.translator_app $file
+  python3 -m src.application.ocr_and_translation_app $file
   sleep 1m
 done
 
