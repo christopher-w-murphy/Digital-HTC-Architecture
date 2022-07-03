@@ -1,7 +1,9 @@
+from typing import Optional
+
 from deepl import Translator, DeepLException
 
 
-def translate_text(text: str, auth_key: str) -> None:
+def translate_text(text: str, auth_key: str) -> Optional[str]:
     translator = Translator(auth_key)
     try:
         translator.translate_text(
