@@ -3,14 +3,13 @@ from typing import Optional
 from deepl import Translator, DeepLException
 
 
-def translate_text(text: str, auth_key: str) -> Optional[str]:
-    translator = Translator(auth_key)
+def translate_text(text: str, translator: Translator) -> Optional[str]:
     try:
-        translator.translate_text(
+        response = translator.translate_text(
             text,
             source_lang='FR',
-            target_lang='EN-GB',
-            split_sentences='off'
+            target_lang='EN-GB'
         )
+        return response.text
     except DeepLException as error:
         print(error)

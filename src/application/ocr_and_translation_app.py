@@ -6,7 +6,7 @@ from src.domain.image_processing import process_image
 from src.infrastructure.io import write_to_file, get_text_filepath, get_tiff_filepath, delete_tiff_file
 from src.infrastructure.tesseract.io import PillowContextManager
 from src.domain.ocr import image_to_ocr_string
-from src.infrastructure.deep_l.configuration import get_deepl_auth_key
+from src.infrastructure.deep_l.translator import get_translator
 from src.domain.translate import translate_text
 
 
@@ -33,8 +33,8 @@ def main() -> None:
 
     if len(source_text) > 0:
         # Translate the OCR text using DeepL
-        auth_key = get_deepl_auth_key()
-        translated_text = translate_text(source_text, auth_key)
+        translator = get_translator()
+        translated_text = translate_text(source_text, translator)
 
         if translated_text is not None:
             trans_filepath = get_text_filepath(pdf_filepath, '_trans')
