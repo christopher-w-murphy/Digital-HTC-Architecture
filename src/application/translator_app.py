@@ -1,12 +1,13 @@
 from pathlib import Path
 
 from src.infrastructure.cli import construct_parser
-from src.infrastructure.imagemagick import process_image, get_tiff_filepath, delete_tiff_file
-from src.infrastructure.tesseract import ocr
-from src.domain.text_processing import remove_line_breaks
-from src.infrastructure.io import write_to_file, get_text_filepath
-from src.infrastructure.configuration import get_deepl_auth_key
-from src.infrastructure.deep_l import translate_text
+from src.infrastructure.imagemagick.io import WandContextManager, save_image
+from src.domain.image_processing import process_image
+from src.infrastructure.io import write_to_file, get_text_filepath, get_tiff_filepath, delete_tiff_file
+from src.infrastructure.tesseract.io import PillowContextManager
+from src.domain.ocr import image_to_ocr_string
+from src.infrastructure.deep_l.configuration import get_deepl_auth_key
+from src.domain.translate import translate_text
 
 
 def main() -> None:
@@ -16,12 +17,14 @@ def main() -> None:
 
     # Convert a PDF to TIFF and make it easier to OCR
     pdf_filepath = Path(args.input_pdf_path)
-    process_image(pdf_filepath)
+    with WandContextManager(pdf_filepath) as pdf_img:
+        processed_img = process_image(pdf_img)
+        save_image(pdf_filepath, processed_img)
 
     # Run the Tesseract OCR program to produce a plain text file in French
     tiff_filepath = get_tiff_filepath(pdf_filepath)
-    source_text = ocr(tiff_filepath)
-    source_text = remove_line_breaks(source_text)
+    with PillowContextManager(tiff_filepath) as tiff_img:
+        source_text = image_to_ocr_string(tiff_img)
 
     ocr_filepath = get_text_filepath(pdf_filepath, '_ocr')
     write_to_file(ocr_filepath, source_text)
