@@ -2,29 +2,19 @@
  This is a simple program for OCR and Machine Translation of PDF documents.
 
 ## Instructions
-How to install and run the OCR and Machine Translation program. These instructions are for macOS. The Prerequisite and Setup steps only need to be run once.
+How to install and run the OCR and Machine Translation program. These instructions are for macOS. The  Setup step only need to be run once.
 
 ### Prerequisites
 Strictly speaking, you need macOS Catalina (10.15) or higher with a 64-bit processor. However, I've tested that this works on macOS Mojave (10.14).
 
-Homebrew is used to install packages. If running `which brew` in a terminal does not return `/usr/local/bin/brew` (or something similar), you'll need to install Homebrew:
-```
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-```
-
-git is needed to clone this repo. If running `which git` does not return something similar to `/usr/bin/git`, install git via Homebrew:
-```
-brew install git
-```
-
-Note that Python 3 is also required. However, this is installed as a dependency in the installer script step below if it's not already on your machine. I'm using Python 3.9. At least Python 3.6 is needed to run this code, but I haven't tested different Python versions.
-
 ### Setup
-Clone this repo. One optional is to open a terminal and run:
+One option is to clone this repo. Open a terminal and run:
 ```
 git clone https://github.com/christopher-w-murphy/Digital-HTC-Architecture.git
 ```
-Move into the repo directory:
+Alternatively, one may download the code by clicking the green Code button and then Download ZIP.
+
+In either case, move into the repo directory:
 ```
 cd Digital-HTC-Architecture/
 ```

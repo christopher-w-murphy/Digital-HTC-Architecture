@@ -7,20 +7,16 @@ read -p "enter folder name: " folder;
 PROJECT_DIR=/Users/christopherwmurphy/Documents/projects/digital_history
 FILES=$PROJECT_DIR/$folder/*
 
+# Active Python virtual environment
+source venv/digital_htc_architecture/bin/activate
+
 # Iterate through all the files in the folder
 for file in $FILES;
 do
-  # Filenames
-  tiff=${file%.*}.tiff
-  ocr=${file%.*}_ocr
-  tlate=${file%.*}_trans
-  # Convert a PDF to TIFF and make it easier to OCR
-  convert -density 300 $file -depth 8 -strip -background white -alpha off $tiff
-  # Run the Tesseract OCR program to produce a plain text file in French
-  tesseract $tiff $ocr -l fra
-  # Translate the OCR text using DeepL
-  python3 -m src.application.translator_app $ocr $tlate
-  # allow the previous file to finish being translated and written
-  # as well as space out your requests to the DeepL API
+  # Run the OCR and Translation program on a file
+  python3 -m src.application.translator_app $file
   sleep 1m
 done
+
+# Deactivate Python virtual environment
+deactivate

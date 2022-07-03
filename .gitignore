@@ -3,3 +3,4 @@ configs/**
 !configs/__init__.py
 *.pyc
 __pycache__/
+venv/**

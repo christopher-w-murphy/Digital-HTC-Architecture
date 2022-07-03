@@ -1,19 +1,11 @@
-def text_file_with_extension(text_file: str) -> str:
-    if not text_file.endswith('.txt'):
-        return text_file + '.txt'
-    return text_file
+from pathlib import Path
 
 
-def read_from_file(input_file: str) -> str:
-    file_name = text_file_with_extension(input_file)
-
-    with open(file_name, 'rb') as f:
-        text = f.read()
-    return text
+def write_to_file(output_path: Path, text: str) -> None:
+    with Path(output_path) as p:
+        p.write_text(text, encoding='utf-8')
 
 
-def write_to_file(output_file: str, text: str) -> None:
-    file_name = text_file_with_extension(output_file)
-    
-    with open(file_name, 'wb') as f:
-        f.write(text)
+def get_text_filepath(filepath: Path, stem_extension: str) -> Path:
+    new_stem = filepath.stem + stem_extension
+    return filepath.with_stem(new_stem).with_suffix('.txt')
