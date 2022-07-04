@@ -26,7 +26,7 @@ While still in the `Digital-HTC-Architecture` directory, start the program by ru
 ```
 bash ocr_and_machine_translation.sh
 ```
-You can now view the Streamlit app in your [browser](http://192.168.0.11:8501/). As it currently stands, there's an [issue](https://github.com/streamlit/streamlit/issues/4658) with Streamlit that prevents the app from being display in Safari. Using Chrome as a browser works.
+You can now view the Streamlit app in your [browser](http://192.168.0.11:8501/). As it currently stands, there's an [issue](https://github.com/streamlit/streamlit/issues/4658) with Streamlit that prevents the app from being display in Safari. Using Chrome as a browser works. To stop running the app enter `control+c` in the terminal.
 
 ## Language Codes
 Codes for specifying the language(s) of documents. Currently the program reads in French and translates to (British) English. A straightforward generalization would be to make the languages configurable.
