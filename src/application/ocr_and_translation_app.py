@@ -1,45 +1,38 @@
-from pathlib import Path
+from typing import Tuple, Optional, Dict, List
+from io import BytesIO
 
-from src.infrastructure.cli import construct_parser
-from src.infrastructure.imagemagick.io import WandContextManager, save_image
-from src.domain.image_processing import process_image
-from src.infrastructure.io import write_to_file, get_text_filepath, get_tiff_filepath, delete_tiff_file
-from src.infrastructure.tesseract.io import PillowContextManager
-from src.domain.ocr import image_to_ocr_string
-from src.infrastructure.deep_l.translator import get_translator
-from src.domain.translate import translate_text
+from src.application.ocr_app import ocr_document
+from src.application.translation_app import translate_document
 
 
-def main() -> None:
-    # parse command line arguments
-    parser = construct_parser()
-    args = parser.parse_args()
+def ocr_and_translate_document(pdf_file: BytesIO, auth_key: str) -> Tuple[str, Optional[str]]:
+    """
+    OCR and Translate a PDF Document
+    """
 
-    # Convert a PDF to TIFF and make it easier to OCR
-    pdf_filepath = Path(args.input_pdf_path)
-    with WandContextManager(pdf_filepath) as pdf_img:
-        processed_img = process_image(pdf_img)
-        save_image(pdf_filepath, processed_img)
-
-    # Run the Tesseract OCR program to produce a plain text file in French
-    tiff_filepath = get_tiff_filepath(pdf_filepath)
-    with PillowContextManager(tiff_filepath) as tiff_img:
-        source_text = image_to_ocr_string(tiff_img)
-
-    ocr_filepath = get_text_filepath(pdf_filepath, '_ocr')
-    write_to_file(ocr_filepath, source_text)
-
-    delete_tiff_file(tiff_filepath)
+    source_text = ocr_document(pdf_file)
 
     if len(source_text) > 0:
-        # Translate the OCR text using DeepL
-        translator = get_translator()
-        translated_text = translate_text(source_text, translator)
-
+        translated_text = translate_document(source_text, auth_key)
         if translated_text is not None:
-            trans_filepath = get_text_filepath(pdf_filepath, '_trans')
-            write_to_file(trans_filepath, translated_text)
+            return source_text, translated_text
+
+    return source_text, None
 
 
-if __name__ == '__main__':
-    main()
+def ocr_and_translate_documents(pdf_files: List[BytesIO], auth_key: str) -> Dict[str, str]:
+    """
+    Run OCR and Translation on multiple documents
+    """
+    results = dict()
+
+    for pdf_file in pdf_files:
+        if pdf_file is not None:
+            source_text, translated_text = ocr_and_translate_document(pdf_file, auth_key)
+
+            file_stem = pdf_file.name.split('.')[0]
+            results[file_stem + '_OCR.txt'] = source_text
+            if translated_text is not None:
+                results[file_stem + '_translated.txt'] = translated_text
+
+        return results
