@@ -35,4 +35,4 @@ def ocr_and_translate_documents(pdf_files: List[BytesIO], auth_key: str) -> Dict
             if translated_text is not None:
                 results[file_stem + '_translated.txt'] = translated_text
 
-        return results
+    return results
