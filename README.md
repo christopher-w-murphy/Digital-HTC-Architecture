@@ -1,41 +1,32 @@
 # Digital-HTC-Architecture
- This is a simple program for OCR and Machine Translation of PDF documents.
+ This is a simple program for OCR and Machine Translation of PDF documents. The backend uses [Imagemagick](https://imagemagick.org/index.php) for image processing, [Tesseract](https://tesseract-ocr.github.io/) for OCR, and [DeepL](https://www.deepl.com/translator) for translation. The frontend is powered by [Streamlit](https://streamlit.io/).
 
 ## Instructions
-How to install and run the OCR and Machine Translation program. These instructions are for macOS. The  Setup step only need to be run once.
-
-### Prerequisites
-Strictly speaking, you need macOS Catalina (10.15) or higher with a 64-bit processor. However, I've tested that this works on macOS Mojave (10.14).
+These instructions are for macOS. Strictly speaking, you need macOS Catalina (10.15) or higher with a 64-bit processor. However, I've tested that this works on macOS Mojave (10.14).
 
 ### Setup
-One option is to clone this repo. Open a terminal and run:
+The Setup step only need to be run once.
+
+To start, one option is to clone this repo. Open a terminal and run:
 ```
 git clone https://github.com/christopher-w-murphy/Digital-HTC-Architecture.git
 ```
 Alternatively, one may download the code by clicking the green Code button and then Download ZIP.
 
-In either case, move into the repo directory:
+In either case, move into the repo directory and run the installer script:
 ```
 cd Digital-HTC-Architecture/
-```
-Run the installer script:
-```
 bash macos_installer.sh
 ```
 
-DeepL is used for translation, and an authentication key is needed to access their API. You can get a key for free, but [registration](https://www.deepl.com/pro-api?cta=header-pro-api) is required. Treat this key as you would a password. For setup purposes, in the configs folder create a plain text file called `auth.txt` and paste your key in the file (and nothing else). Git will ignore this file, so it will not be version controlled, i.e. not shared publicly.
-
-Lastly, in the script `ocr_and_machine_translation.sh` change the PROJECT_DIR to the path that will contain folders of files you'd like to OCR and translate.
+DeepL is used for translation, and an authentication key is needed to access their API. You can get a key for free, but [registration](https://www.deepl.com/pro-api) is required. Treat this key as you would a password. The Streamlit app is stateless, so it won't remember your key. However, you can store your key in a (web browser-based) password manager.
 
 ### Running the OCR and Translation Program
 While still in the `Digital-HTC-Architecture` directory, start the program by running the following command in a terminal:
 ```
 bash ocr_and_machine_translation.sh
 ```
-You will receive a prompt asking for a folder name. This is a subfolder within the PROJECT_DIR containing all the PDF files you want to OCR and translate. File names should not have special characters. I tend to avoid spaces in file names as well.
-
-When the program is finished running you will have two output text files for each input PDF. One file is the text read from PDF in the source language and is labeled "ocr."  The other is the text translated into the target language, which is label "trans."
-
+You can now view the Streamlit app in your [browser](http://192.168.0.11:8501/). As it currently stands, there's an [issue](https://github.com/streamlit/streamlit/issues/4658) with Streamlit that prevents the app from being display in Safari. Using Chrome as a browser works.
 
 ## Language Codes
 Codes for specifying the language(s) of documents. Currently the program reads in French and translates to (British) English. A straightforward generalization would be to make the languages configurable.
@@ -44,4 +35,4 @@ Codes for specifying the language(s) of documents. Currently the program reads i
 
 ## Acknowledgements
 
-This process was inspired by [Programming Historian](https://programminghistorian.org/en/lessons/OCR-and-Machine-Translation). (Note they have installation instructions for Windows.) I'm using DeepL for translation as it was recommended to me for translation performance purposes.
+The structure of this program was originally inspired by [Programming Historian](https://programminghistorian.org/en/lessons/OCR-and-Machine-Translation). (Note they have installation instructions for Windows.) My tech stack is different from theirs. Notably, my frontend was made with Streamlit. Additionally, I'm using DeepL for translation as it was recommended to me for translation performance purposes.
