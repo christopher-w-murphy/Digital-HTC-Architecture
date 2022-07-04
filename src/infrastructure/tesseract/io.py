@@ -1,11 +1,11 @@
-from pathlib import Path
+from io import BytesIO
 
 from PIL import Image
 
 
 class PillowContextManager(object):
-    def __init__(self, filepath: Path):
-        self.img = Image.open(filepath)
+    def __init__(self, bytes_stream: BytesIO):
+        self.img = Image.open(bytes_stream)
 
     def __enter__(self):
         return self.img
