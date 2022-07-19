@@ -1,7 +1,7 @@
 from io import BytesIO
 from pathlib import Path
 
-from src.infrastructure.imagemagick.io import WandContextManager, save_tiff_file
+from src.infrastructure.imagemagick.io import WandContextManager, save_tiff_file, get_temp_directory
 from src.domain.image_processing import process_image
 from src.infrastructure.tesseract.io import PillowContextManager, delete_tiff_file
 from src.domain.ocr import image_to_ocr_string
@@ -9,7 +9,8 @@ from src.domain.ocr import image_to_ocr_string
 
 def get_tiff_filepath(filename: str) -> Path:
     file_stem = filename.split('.')[0]
-    return Path.cwd() / 'temp' / f'{file_stem}.tiff'
+    temp_dir = get_temp_directory()
+    return temp_dir / f'{file_stem}.tiff'
 
 
 def ocr_document(pdf_file: BytesIO) -> str:
