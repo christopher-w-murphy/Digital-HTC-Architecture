@@ -17,11 +17,5 @@ class WandContextManager(object):
         self.img.close()
 
 
-def get_temp_path() -> Path:
-    temp_path = Path.cwd() / 'temp'
-    temp_path.mkdir(exist_ok=True)
-    return temp_path
-
-
 def save_tiff_file(img: Image, filepath: Path) -> None:
     img.save(filename=filepath)
