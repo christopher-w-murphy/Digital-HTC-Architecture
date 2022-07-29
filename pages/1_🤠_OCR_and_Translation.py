@@ -1,11 +1,7 @@
-from pathlib import Path
-import sys
-
 import streamlit as st
 
-sys.path.append(str(Path(__file__).resolve().parent.parent))
-
 from src.application.ocr_and_translation_app import ocr_and_translate_documents
+from src.application.languages import deepl_target_languages
 from src.infrastructure.streamlit.downloads import zip_results_for_download, get_zip_filename
 
 
@@ -20,7 +16,11 @@ files = st.file_uploader("Upload PDF(s)", type='pdf', accept_multiple_files=True
 st.subheader('Select your languages')
 
 source_lang = st.selectbox("Source Language", ["French"])
-target_lang = st.selectbox("Target Language", ["English"])
+
+target_lang_names = list(deepl_target_languages.keys())
+target_lang_names.sort()
+default_target_name = target_lang_names.index('English (British)')
+target_lang = st.selectbox("Target Language", target_lang_names, index=default_target_name)
 
 st.subheader('Enter your DeepL authentication key')
 
