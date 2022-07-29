@@ -4,9 +4,9 @@ from io import BytesIO
 from zipfile import ZipFile, ZIP_DEFLATED
 
 
-def get_zip_filename() -> str:
+def get_zip_filename(app_name: str = 'ocr_and_tranlsation') -> str:
     now = datetime.now().strftime('%Y-%m-%d_%H:%M:%S')
-    return f'ocr_and_tranlsation_{now}.zip'
+    return f'{app_name}_{now}.zip'
 
 
 def zip_results_for_download(results: Dict[str, str]) -> str:
