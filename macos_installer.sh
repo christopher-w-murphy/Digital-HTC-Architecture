@@ -38,6 +38,18 @@ then
 fi
 
 
+# Upgrade pip for superstitious reasons.
+python3 -m pip install --upgrade pip
+
+
+# Check if virtualenv is installed
+if ! command -v virtualenv &> /dev/null
+then
+  echo "virtualenv could not be found. Installing virtualenv."
+  # Install virtualenv if not found
+  python3 -m pip install virtualenv
+fi
+
 # Python environment
 echo "Creating a Python virtual environment."
 mkdir -p venv
