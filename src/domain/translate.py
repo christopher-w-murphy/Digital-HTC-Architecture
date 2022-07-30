@@ -3,12 +3,7 @@ from typing import Optional
 from deepl import Translator, DeepLException
 
 
-def translate_text(
-    text: str,
-    translator: Translator,
-    source_code: Optional[str] = None,
-    target_code: Optional[str] = None
-) -> Optional[str]:
+def translate_text(text: str, translator: Translator, source_code: Optional[str] = None, target_code: Optional[str] = None) -> Optional[str]:
     """
     Use DeepL to tranlsate text
     """

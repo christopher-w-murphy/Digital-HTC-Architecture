@@ -6,12 +6,7 @@ from src.domain.translate import translate_text
 from src.application.languages import deepl_source_languages, deepl_target_languages
 
 
-def translate_document(
-    source_text: str,
-    auth_key: str,
-    source_code: Optional[str] = None,
-    target_code: Optional[str] = None
-) -> Optional[str]:
+def translate_document(source_text: str, auth_key: str, source_code: Optional[str] = None, target_code: Optional[str] = None) -> Optional[str]:
     """
     Translate the OCR text using DeepL
     """
@@ -24,12 +19,7 @@ def stream_to_str(txt_file: BytesIO) -> str:
     return stringio.read()
 
 
-def translate_documents(
-    txt_files: List[BytesIO],
-    auth_key: str,
-    source_name: Optional[str] = None,
-    target_name: Optional[str] = None
-) -> Optional[Dict[str, str]]:
+def translate_documents(txt_files: List[BytesIO], auth_key: str, source_name: Optional[str] = None, target_name: Optional[str] = None) -> Optional[Dict[str, str]]:
     """
     Translate multiple documents
     """
