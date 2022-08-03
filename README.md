@@ -5,11 +5,11 @@
 
 ## Example
 Original Document
- ![Original document](STATIC/example_original.png)
+ ![Original document](resources/example_original.png)
  OCR text in original language
- ![OCR text in original language](STATIC/example_OCR.png)
+ ![OCR text in original language](resources/example_OCR.png)
  Translated text
- ![Translated text](STATIC/example_translated.png)
+ ![Translated text](resources/example_translated.png)
 
 ## Instructions
 These instructions are for macOS. Strictly speaking, you need macOS Catalina (10.15) or higher with a 64-bit processor. However, I've tested that this works on macOS Mojave (10.14). [Programming Historian](https://programminghistorian.org/en/lessons/OCR-and-Machine-Translation) has instructions for Windows for an OCR and translation program.
@@ -37,7 +37,7 @@ While still in the `Digital-HTC-Architecture` directory, start the program by ru
 bash ocr_and_machine_translation.sh
 ```
 You can now view the Streamlit app in your [browser](hhttp://localhost:8501). The UI should look something like this:
- ![Streamlit UI](STATIC/streamlit.png)
+ ![Streamlit UI](resources/streamlit.png)
 As it currently stands, there's an [issue](https://github.com/streamlit/streamlit/issues/4658) with Streamlit that prevents the app from being displayed in Safari. Using Chrome as a browser works. To stop running the app enter `control+c` in the terminal.
 
 ## Language Codes
