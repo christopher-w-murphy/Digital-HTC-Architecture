@@ -1,7 +1,7 @@
 deepl==1.8.0
 pytesseract==0.3.9
 Pillow==9.2.0
-Wand==0.6.7
+Wand==0.6.9
 streamlit==1.10.0
 pytest==7.1.2
 pytest-cov==3.0.0
