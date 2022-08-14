@@ -6,7 +6,7 @@ from src.infrastructure.streamlit.downloads import get_zip_filename, zip_results
 
 def test_get_zip_filename():
     test_timestamp = datetime(2022, 7, 30, 0, 0, 0)
-    result = f'ocr_and_tranlsation_{test_timestamp}.zip'
+    result = f'ocr_and_translation_{test_timestamp}.zip'
     assert get_zip_filename(timestamp=test_timestamp) == result
 
 

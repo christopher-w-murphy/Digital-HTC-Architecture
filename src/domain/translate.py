@@ -5,7 +5,7 @@ from deepl import Translator, DeepLException
 
 def translate_text(text: str, translator: Translator, source_code: Optional[str] = None, target_code: Optional[str] = None) -> Optional[str]:
     """
-    Use DeepL to tranlsate text
+    Use DeepL to translate text
     """
     if source_code is None:
         source_code = 'FR'

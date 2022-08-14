@@ -4,7 +4,7 @@ from io import BytesIO
 from zipfile import ZipFile, ZIP_DEFLATED
 
 
-def get_zip_filename(app_name: str = 'ocr_and_tranlsation', timestamp: Optional[datetime] = None) -> str:
+def get_zip_filename(app_name: str = 'ocr_and_translation', timestamp: Optional[datetime] = None) -> str:
     if timestamp is None:
         timestamp = datetime.now().strftime('%Y-%m-%d_%H:%M:%S')
     return f'{app_name}_{timestamp}.zip'
