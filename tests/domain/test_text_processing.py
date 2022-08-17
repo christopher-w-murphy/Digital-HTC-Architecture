@@ -1,7 +1,7 @@
 from src.domain.text_processing import remove_excess_line_breaks
 
 
-class TestRemoveExcessLineBraks:
+class TestRemoveExcessLineBreaks:
     def test_str(self):
         text = 'Earth-\nquake wrapped onto the next line.\n\nStart of next\nparagraph.\n\n'
         result = 'Earthquake wrapped onto the next line.\n\tStart of next paragraph.'

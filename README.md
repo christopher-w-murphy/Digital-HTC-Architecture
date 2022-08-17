@@ -47,7 +47,7 @@ docker pull murphycw/digital-htc-architecture
 ```
 Run the image as a container to start the program
 ```
-docker run -d -p 8501:8051 murphycw/digital-htc-architecture
+docker run -d -p 8501:8501 murphycw/digital-htc-architecture
 ```
 Note that the Docker image has Tesseract v4 as opposed to v5, and can only OCR English and French documents.
 
