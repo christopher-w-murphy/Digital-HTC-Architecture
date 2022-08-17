@@ -1,35 +1,50 @@
+# Build image
+FROM python:3.9 as builder
+
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+    gcc \
+    wget
+
+COPY requirements.txt .
+RUN python -m venv /opt/venv
+ENV PATH="/opt/venv/bin:$PATH"
+RUN pip install -r requirements.txt
+
+RUN wget -O eng.traineddata https://github.com/tesseract-ocr/tessdata_best/blob/main/eng.traineddata?raw=true
+RUN wget -O fra.traineddata https://github.com/tesseract-ocr/tessdata_best/blob/main/fra.traineddata?raw=true
+
+# Final image
 FROM python:3.9-slim
 
 WORKDIR /project
 
-COPY requirements.txt /project
-RUN pip install --no-cache-dir -r requirements.txt
+COPY --from=builder /opt/venv /opt/venv
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
+    ghostscript \
     imagemagick \
     tesseract-ocr \
-    wget \
     && rm -rf /var/lib/apt/lists/*
 
-RUN wget -O /usr/share/tesseract-ocr/4.00/tessdata/eng.traineddata https://github.com/tesseract-ocr/tessdata_best/blob/main/eng.traineddata?raw=true
-RUN wget -O /usr/share/tesseract-ocr/4.00/tessdata/fra.traineddata https://github.com/tesseract-ocr/tessdata_best/blob/main/fra.traineddata?raw=true
+COPY --from=builder eng.traineddata /usr/share/tesseract-ocr/4.00/tessdata/eng.traineddata
+COPY --from=builder fra.traineddata /usr/share/tesseract-ocr/4.00/tessdata/fra.traineddata
 
 # Give ImageMagick permission to read and write PDFs on Linux
 RUN sed -i 's/rights="none" pattern="PDF"/rights="read|write" pattern="PDF"/g' /etc/ImageMagick-6/policy.xml
 
-# run container processes with a non-root user
-RUN addgroup --system app && adduser --system --group app
-
-RUN mkdir ~/.streamlit
-COPY .streamlit/config.toml ~/.streamlit/config.toml
+RUN mkdir /root/.streamlit
+COPY .streamlit/config.toml /root/.streamlit/config.toml
 
 COPY 0_🦃_Digital_HTC_Architecture.py /project
 COPY pages/ /project/pages
 COPY src/ /project/src
 
-USER app
 EXPOSE 8501
 
-ENTRYPOINT ["streamlit"]
-CMD ["run", "0_🦃_Digital_HTC_Architecture.py"]
+ENV PATH="/opt/venv/bin:$PATH"
+CMD ["streamlit", "run", "0_🦃_Digital_HTC_Architecture.py"]
