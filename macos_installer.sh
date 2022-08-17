@@ -1,4 +1,5 @@
 #!/bin/bash
+set -euo pipefail
 
 # Check if Homebrew is installed
 if ! command -v brew &> /dev/null
@@ -50,13 +51,12 @@ then
   python3 -m pip install virtualenv
 fi
 
+
 # Python environment
 echo "Creating a Python virtual environment."
-mkdir -p venv
-cd venv
-python3 -m virtualenv digital_htc_architecture
-cd ..
+python3 -m virtualenv venv
 echo "Installing Python packages."
-source venv/digital_htc_architecture/bin/activate
+source venv/bin/activate
+python3 -m pip install --upgrade pip
 python3 -m pip install -r requirements.txt
 deactivate
