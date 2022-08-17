@@ -47,9 +47,12 @@ docker pull murphycw/digital-htc-architecture
 ```
 Run the image as a container to start the program
 ```
-docker run -d -p 8501:8051 murphycw/digital-htc-architecture
+docker run -d -p 8501:8501 murphycw/digital-htc-architecture
 ```
 Note that the Docker image has Tesseract v4 as opposed to v5, and can only OCR English and French documents.
+
+Also, the Docker image was build on a Mac with an Intel processor.
+As such it will not currently run on an M1 or M2 process because of the difference in [CPU instruction sets](https://pythonspeed.com/articles/docker-build-problems-mac/), which is in conflict with Docket's promise of reproducibility.
 
 ### Windows
 [Programming Historian](https://programminghistorian.org/en/lessons/OCR-and-Machine-Translation) has instructions for a Windows for an OCR and translation program.
